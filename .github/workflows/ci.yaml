@@ -42,11 +42,13 @@ jobs:
           sleep 60
       
       - name: Install dependencies
-        run: pip install tox
+        run: |
+          pip install wheel
+          python setup.py bdist_wheel 
+          pip install tox
       
       - name: Run tests
         run: |
-          pip install tox
           uname -m
           export VP_TEST_USER=dbadmin
           tox -e py
