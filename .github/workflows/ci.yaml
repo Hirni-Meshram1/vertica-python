@@ -9,17 +9,17 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Build x86_64 packages
-        uses: RalfG/python-wheels-manylinux-build@v0.3.2-manylinux2014_x86_64
-        with:
-          python-versions: "cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39"
+      #- name: Build x86_64 packages
+      #  uses: RalfG/python-wheels-manylinux-build@v0.3.2-manylinux2014_x86_64
+      #  with:
+      #    python-versions: "cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39"
       - name: Build aarch64 packages
         uses: RalfG/python-wheels-manylinux-build@v0.3.3-manylinux2014_aarch64
         with:
           python-versions: "cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39"
       - name: Set up a Vertica server
         env:
-          VERTICA_CE_URL: "https://vertica-community-edition-for-testing.s3.amazonaws.com/XCz9cp7m/vertica-10.0.1-0.x86_64.RHEL6.rpm"
+          VERTICA_CE_URL: "https://vertica-community-edition-for-testing.s3.amazonaws.com/XCz9cp7m/vertica-10.0.1-0.aarch64.RHEL6.rpm"
         run: |
           git clone https://github.com/jbfavre/docker-vertica.git
           curl $VERTICA_CE_URL --create-dirs -o docker-vertica/packages/vertica-ce.latest.rpm
