@@ -10,7 +10,7 @@ jobs:
       matrix:
           include:
           - arch: aarch64
-            python-version: [3.8]
+            python-version: 3.8
 
     steps:
       - name: Check out repository
