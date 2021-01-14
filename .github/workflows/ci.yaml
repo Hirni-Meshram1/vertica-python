@@ -8,8 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          arch: aarch64
-          python-version: [3.8]
+          include:
+          - arch: aarch64
+            python-version: [3.8]
 
     steps:
       - name: Check out repository
