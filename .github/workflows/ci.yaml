@@ -42,17 +42,15 @@ jobs:
       matrix:
         python-version: [3.8]
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v2
       - run: |
           docker run --rm --privileged hypriot/qemu-register
-      
+          uname -m
       - name: Setup test environment and run tests      
         uses: docker://quay.io/pypa/manylinux2014_aarch64  
-      
+        with:
+          args: |
+            uname -m;      
       - name: Set up a Vertica server
         env:
           VERTICA_CE_URL: "https://vertica-community-edition-for-testing.s3.amazonaws.com/XCz9cp7m/vertica-10.0.1-0.x86_64.RHEL6.rpm"
