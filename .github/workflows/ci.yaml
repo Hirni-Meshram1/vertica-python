@@ -9,6 +9,8 @@ jobs:
     strategy:
       matrix:
           include:
+          - arch: amd64
+            python-version: 3.8
           - arch: aarch64
             python-version: 3.8
 
