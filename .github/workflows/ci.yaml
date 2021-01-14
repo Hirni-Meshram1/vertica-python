@@ -67,5 +67,6 @@ jobs:
           args: pip install tox;
       - name: Run tests
         run: |
+          uname -m
           export VP_TEST_USER=dbadmin
           tox -e py      
