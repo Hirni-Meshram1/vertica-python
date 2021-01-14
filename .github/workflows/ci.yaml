@@ -46,27 +46,21 @@ jobs:
       - run: |
           docker run --rm --privileged hypriot/qemu-register
           uname -m
-      - name: Setup test environment and run tests      
+      - name: Setup test environment and run tests and Vertica server     
         uses: docker://quay.io/pypa/manylinux2014_aarch64  
+        env:
+          VERTICA_CE_URL: "https://vertica-community-edition-for-testing.s3.amazonaws.com/XCz9cp7m/vertica-10.0.1-0.x86_64.RHEL6.rpm"
         with:
           args: |
             bash -c "uname -m;      
-      - name: Set up a Vertica server
-        env:
-          VERTICA_CE_URL: "https://vertica-community-edition-for-testing.s3.amazonaws.com/XCz9cp7m/vertica-10.0.1-0.x86_64.RHEL6.rpm"
-        run: |
-          uname -m
-          git clone https://github.com/jbfavre/docker-vertica.git
-          curl $VERTICA_CE_URL --create-dirs -o docker-vertica/packages/vertica-ce.latest.rpm
-          docker build -f docker-vertica/Dockerfile.centos.7_9.x --build-arg VERTICA_PACKAGE=vertica-ce.latest.rpm -t jbfavre/vertica docker-vertica
-          docker images
-          docker run -d -p 5433:5433 jbfavre/vertica
-          sleep 60
-      
-      - name: Install dependencies
-        run: |
-          uname -m
-          pip install tox
+            git clone https://github.com/jbfavre/docker-vertica.git;
+            curl $VERTICA_CE_URL --create-dirs -o docker-vertica/packages/vertica-ce.latest.rpm;
+            docker build -f docker-vertica/Dockerfile.centos.7_9.x --build-arg VERTICA_PACKAGE=vertica-ce.latest.rpm -t jbfavre/vertica docker-vertica;
+            docker images;
+            docker run -d -p 5433:5433 jbfavre/vertica;
+            sleep 60;
+            pip install tox;
+     
       - name: Run tests
         run: |
           uname -m
