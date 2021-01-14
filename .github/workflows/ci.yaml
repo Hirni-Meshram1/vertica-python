@@ -63,8 +63,8 @@ jobs:
           sleep 60
       - name: Setup test environment and run tests      
         uses: docker://quay.io/pypa/manylinux2014_aarch64  
-        with:
-          args: pip install tox;
+      - name: Install dependencies
+        run: pip install tox
       - name: Run tests
         run: |
           uname -m
