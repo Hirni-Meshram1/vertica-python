@@ -61,9 +61,11 @@ jobs:
             docker run -d -p 5433:5433 jbfavre/vertica;
             sleep 60;
             pip install tox;
+            export VP_TEST_USER=dbadmin;
+            tox -e py;      
      
-      - name: Run tests
-        run: |
-          uname -m
-          export VP_TEST_USER=dbadmin
-          tox -e py      
+      #- name: Run tests
+       # run: |
+        #  uname -m
+         # export VP_TEST_USER=dbadmin
+          #tox -e py      
