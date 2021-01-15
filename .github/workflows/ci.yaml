@@ -54,8 +54,8 @@ jobs:
           args: |
             bash -c "uname -m;  
             yum install -y python3 python3-pip python3-devel;  
-            find -name pip;
-            find -name docker;
+            find / -name pip;
+            find / -name docker;
             git clone https://github.com/jbfavre/docker-vertica.git;
             curl $VERTICA_CE_URL --create-dirs -o docker-vertica/packages/vertica-ce.latest.rpm;
             docker build -f docker-vertica/Dockerfile.centos.7_9.x --build-arg VERTICA_PACKAGE=vertica-ce.latest.rpm -t jbfavre/vertica docker-vertica;
@@ -63,7 +63,7 @@ jobs:
             docker run -d -p 5433:5433 jbfavre/vertica;
             sleep 60;
             pip install tox;
-            find -name tox;
+            find / -name tox;
             export VP_TEST_USER=dbadmin;
             tox -e py;      
      
