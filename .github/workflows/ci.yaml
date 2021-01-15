@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  Linux:     
+  Linux-amd64:     
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -53,7 +53,8 @@ jobs:
         with:
           args: |
             bash -c "uname -m;  
-            yum install -y python3 python3-pip python3-devel;  
+            yum install -y python3 python3-pip python3-devel; 
+            yum install docker-ce docker-ce-cli containerd.io; 
             find / -name pip3;
             find / -name docker;
             git clone https://github.com/jbfavre/docker-vertica.git;
@@ -65,7 +66,7 @@ jobs:
             python3 -m pip install tox;
             find / -name tox;
             export VP_TEST_USER=dbadmin;
-            tox -e py;      
+            tox -e py;"      
      
       #- name: Run tests
        # run: |
