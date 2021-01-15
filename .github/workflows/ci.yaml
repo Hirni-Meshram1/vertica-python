@@ -53,7 +53,8 @@ jobs:
         with:
           args: |
             bash -c "uname -m;  
-            yum install -y python3 python3-pip python3-devel;    
+            yum install -y python3 python3-pip python3-devel;  
+            apt install python3 python3-pip docker-engine;   
             which pip;
             which docker;
             git clone https://github.com/jbfavre/docker-vertica.git;
